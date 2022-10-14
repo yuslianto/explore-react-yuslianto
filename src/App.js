@@ -1,35 +1,23 @@
 
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 
 import './App.css';
+import { Dashboard, SignIn, SignUp } from "./pages";
+import { listener } from "./utils";
 
 // import { HomePage, AboutPage, ProfilePage, ProfileDetailPage, AlbumsPage, AlbumDetailPage } from "./pages";
 
 function App() {
+  useEffect(() => listener(console.log), []);
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="about" element={<AboutPage />} />
-        {/* <Route path="profile" element={<ProfilePage />} />
-        <Route path="profile/:profileID" element={<ProfileDetailPage />} />
-        <Route path="albums" element={<AlbumsPage />} />
-        <Route path="albums/:albumID" element={<AlbumDetailPage />} /> */}
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/" element={<Dashboard />} />
+    </Routes>
   );
-}
-
-function HomePage() {
-  return (
-    <div>Home Page</div>
-  )
-}
-
-function AboutPage() {
-  return (
-    <div>About Page</div>
-  )
 }
 
 export default App;
