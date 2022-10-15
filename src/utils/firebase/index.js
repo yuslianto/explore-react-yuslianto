@@ -1,6 +1,7 @@
 import { auth } from "./base";
-import { signingIn } from './SignIn'
+import { signingIn } from './signin'
 import { listener } from './listener'
-import { signingUp } from "./SignUp";
+import { signingUp } from "./signup";
+import { signingOut } from "./signout";
 
-export { auth, signingIn, listener, signingUp }
+export { auth, signingIn, listener, signingUp, signingOut }

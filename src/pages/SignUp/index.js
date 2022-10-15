@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import { useContext, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import { Banner1, Logo } from '../../assets';
-import { signingIn, signingUp, AuthContext } from '../../utils';
+import { AuthContext, signingIn, signingUp } from '../../utils';
 
 function Copyright(props) {
   return (
@@ -29,7 +29,6 @@ function Copyright(props) {
   );
 }
 
-
 const theme = createTheme();
 
 const SignUp = () => {
@@ -40,7 +39,8 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signUp = async () => {
+  const handleSignUp = async (event) => {
+    event.preventDefault();
     console.log(email, password);
     const response = await signingUp(email, password);
     console.log(response);
@@ -76,7 +76,7 @@ const SignUp = () => {
             <Typography component="h1" variant="h5">
               Sign Up
             </Typography>
-            <Box component="form" noValidate onClick={signUp} sx={{ mt: 1 }}>
+            <Box component="form" noValidate onSubmit={handleSignUp} sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -109,7 +109,7 @@ const SignUp = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                onClick={signUp}
+                // onClick={signUp}
                 sx={{ mt: 3, mb: 2 }}
               >
                 Sign Up

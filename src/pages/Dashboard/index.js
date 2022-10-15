@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useNavigate } from 'react-router-dom'
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -17,8 +18,10 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import LogoutIcon from '@mui/icons-material/Logout';
 // import { mainListItems, secondaryListItems } from './listItems';
 import { mainListItems, secondaryListItems, Chart, Orders, Deposits } from '../../components'
+import { signingOut } from '../../utils';
 
 
 function Copyright(props) {
@@ -83,10 +86,18 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 const DashboardContent = () => {
+  const navigate = useNavigate()
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
+
+  const handleSignOut = async () => {
+    const loggedOut = await signingOut();
+    if (!loggedOut.message) {
+      navigate("/signup")
+    }
+  }
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -120,9 +131,12 @@ const DashboardContent = () => {
               Dashboard
             </Typography>
             <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
+              <Badge badgeContent={4} color="warning">
                 <NotificationsIcon />
               </Badge>
+            </IconButton>
+            <IconButton color="inherit" onClick={handleSignOut}>
+              <LogoutIcon />
             </IconButton>
           </Toolbar>
         </AppBar>

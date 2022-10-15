@@ -38,9 +38,20 @@ const SignIn = () => {
 
   // const navigate = useNavigate()
 
-  const signIn = async () => {
+  // const signIn = async () => {
+  //   console.log('email', email, 'password', password)
 
-    // event.preventDefault();
+  //   const signedIn = await signingIn(email, password)
+
+  //   if (!signedIn.message) {
+  //     setUser(signedIn.accessToken);
+  //   } else {
+  //     console.log(signedIn.message);
+  //   }
+  // };
+
+  const handleSignIn = async (event) => {
+    event.preventDefault();
     console.log('email', email, 'password', password)
 
     const signedIn = await signingIn(email, password)
@@ -50,13 +61,6 @@ const SignIn = () => {
     } else {
       console.log(signedIn.message);
     }
-
-    // const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    // });
-    // navigate('/dashboard')
   };
 
   return (
@@ -92,7 +96,7 @@ const SignIn = () => {
             <Typography component="h1" variant="h5">
               Sign In
             </Typography>
-            <Box component="form" noValidate  sx={{ mt: 1 }}>
+            <Box component="form" onSubmit={handleSignIn} noValidate sx={{ mt: 1 }}>
               <TextField
                 margin="normal"
                 required
@@ -125,7 +129,7 @@ const SignIn = () => {
                 type="submit"
                 fullWidth
                 variant="contained"
-                onClick={signIn}
+                // onClick={handleSubmit}
                 sx={{ mt: 3, mb: 2 }}
               >
                 Sign In
